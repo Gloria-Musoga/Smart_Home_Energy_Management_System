@@ -34,7 +34,7 @@ def main():
 
     # Prediction Code
     if st.button('Predict'):
-        make_predictions = model.predict([features)
+        make_predictions = model.predict([features])
         output = round(make_predictions[0], 2)
         st.success('Energy Consumption will be {} kW'.format(output))
 
