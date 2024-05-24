@@ -30,7 +30,7 @@ def main():
     Holiday_mapped = map_categorical_to_num(Holiday, ['No', 'Yes'])
 
     # Combine input features
-    features = [Temperature, Humidity,SquareFootage,Occupancy,HVACUsage_mapped, LightingUsage_mapped, DayOfWeek_mapped, Holiday_mapped]
+    features = [float(Temperature),float(Humidity),float(SquareFootage),int(Occupancy),HVACUsage_mapped, LightingUsage_mapped, DayOfWeek_mapped, Holiday_mapped]
 
     # Prediction Code
     if st.button('Predict'):
