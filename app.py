@@ -1,11 +1,10 @@
-
 import pickle
 import streamlit as st
 import numpy as np
 
 model = pickle.load(open('lasso_model.pkl', 'rb'))
 
-def map_categorical_to_numerical(value, categories):
+def map_categorical_to_num(value, categories):
     """
     Maps categorical input to numerical values.
     """
@@ -25,18 +24,17 @@ def main():
     Holiday = st.selectbox('Holiday', ['No', 'Yes'])
 
     # Map categorical variables to numerical values
-    HVACUsage_mapped = map_categorical_to_numerical(HVACUsage, ['Off', 'On'])
-    LightingUsage_mapped = map_categorical_to_numerical(LightingUsage, ['Off', 'On'])
-    DayOfWeek_mapped = map_categorical_to_numerical(DayOfWeek, ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
-    Holiday_mapped = map_categorical_to_numerical(Holiday, ['No', 'Yes'])
+    HVACUsage_mapped = map_categorical_to_num(HVACUsage, ['Off', 'On'])
+    LightingUsage_mapped = map_categorical_to_num(LightingUsage, ['Off', 'On'])
+    DayOfWeek_mapped = map_categorical_to_num(DayOfWeek, ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+    Holiday_mapped = map_categorical_to_num(Holiday, ['No', 'Yes'])
 
     # Combine input features
-    features = [Temperature, Humidity,SquareFootage,Occupancy,
-                HVACUsage_mapped, LightingUsage_mapped, DayOfWeek_mapped, Holiday_mapped]
+    features = [Temperature, Humidity,SquareFootage,Occupancy,HVACUsage_mapped, LightingUsage_mapped, DayOfWeek_mapped, Holiday_mapped]
 
     # Prediction Code
     if st.button('Predict'):
-        make_predictions = model.predict([features])
+        make_predictions = model.predict([features)
         output = round(make_predictions[0], 2)
         st.success('Energy Consumption will be {} kW'.format(output))
 
