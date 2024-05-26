@@ -15,17 +15,24 @@ def main():
 
     # Input variables
     Temperature = st.text_input('Temperature')
+    Humidity = st.text_input('Humidity in Percentage')
+    SquareFootage = st.text_input('Square Footage')
     Occupancy = st.text_input('Occupancy')
     HVACUsage = st.selectbox('HVAC Usage', ['Off', 'On'])
     LightingUsage = st.selectbox('Lighting Usage', ['Off', 'On'])
+    DayOfWeek = st.selectbox('Day Of Week', ['Sunday', 'Monday','Tuesday', 'Wednesday','Thursday', 'Friday','Saturday'])
+    Holiday = st.selectbox('Holiday', ['No', 'Yes'])
 
     # Map categorical variables to numerical values
     HVACUsage_mapped = map_categorical_to_num(HVACUsage, ['Off', 'On'])
     LightingUsage_mapped = map_categorical_to_num(LightingUsage, ['Off', 'On'])
+    DayOfWeek_mapped = map_categorical_to_num(DayOfWeek, ['Sunday', 'Monday','Tuesday', 'Wednesday','Thursday', 'Friday','Saturday'])
+    Holiday_mapped = map_categorical_to_num(Holiday, ['No', 'Yes'])
+    
     
 
     # Combine input features
-    features = [float(Temperature),int(Occupancy),HVACUsage_mapped, LightingUsage_mapped]
+    features = [float(Temperature),float(Humidity),float(SquareFootage),int(Occupancy),HVACUsage_mapped, LightingUsage_mapped,DayOfWeek_mapped,Holiday_mapped]
 
     # Prediction Code
     if st.button('Predict'):
